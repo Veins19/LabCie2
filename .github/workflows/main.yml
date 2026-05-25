@@ -1,0 +1,24 @@
+name: CI/CD Pipeline
+on:
+  push:
+    branches:
+    - main
+jobs:
+  build-test-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+        
+      - name: Set Up Docker
+        run: docker --version
+
+      - name: Build Container
+        run: docker build -t myapp .
+
+      - name: Run Test
+        run: docker run myapp
+
+      - name: Run Container
+        run: docker run myapp
